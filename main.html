@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Welcome to Noty</title>
+    <link rel="stylesheet" href="plugin/bootstrap-material-design.css"/>
+    <link rel="stylesheet" href="tema.css"/>
+    <script src="plugin/jQuery.js"></script>
+    <script src="popper.min.js"></script>
+    <script src="plugin/bootstrap-material-design.js"></script>
+    <script src="script/redirect.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg" id="menuatas">
+         <!-- <a class="navbar-brand" href="#">NOTY</a> -->
+         <div class="col"><img src="img/logo.png" width="50px" height="50px"></div>
+         <div class="col" id="signin_note">Already have an account?</div>
+         <button type="button" onclick="signIn()" class="btn btn-outline-warning" id="tombol_masuk">Sign-in</button>
+    </nav>
+    <div class="container-fluid" style="background-color: #e69138;">
+        <div class="row">
+            <div class="col" id="register_content">
+                
+                <div id="register_center_div">
+                    
+                    <b>NOTY</b><br>
+                    <button type="button"id="btn_register_now" onclick="isiForm()" class="btn btn-raised btn-primary">REGISTER NOW</button>
+                    
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="whychoose">
+                <div id="chooseus_center_div">
+                    <div class="explain_title">WHY CHOOSING US?</div><br>
+                    <div class="kotak1title">We provide your dialy needs in keeping
+                        everywords that matter
+                    </div>
+                    <div class="kotak1title">Our UI make everything looks easy just write and go </div>
+                    <div class="kotak1title">everything that you keep with us is secured</div>
+                    <!-- <button type="button"id="btn_register_now" class="btn btn-raised btn-primary">REGISTER NOW</button> -->
+                    
+                </div>  
+            </div>
+        </div>
+        <div id="baris_footer" class="row">
+            <div class="col" id="bagian_footer">
+                <p id="logo_footer" style="font-size: 30px;"><hr>NOTY</p>
+            </div>
+            <div class="col"  id="bagian_footer"><hr>Universitas Multimedia Nusantara Jalan Scientia
+                Boulevard, Tangerang, Banten
+            </div>
+            <div class="col" id="bagian_footer"><hr>Contact Us
+                <img onclick="githubRedirect()" class="gambar_contact"src="img/github-mark.png" width="50px" height="50px">
+                <img onclick="kirimEmail()"class="gambar_contact"src="img/gmaillogo.png" width="50px"height="50px">
+                
+            </div>
+        </div>
+        <div id="bagian_footer_small" class="row">
+            <div class="col" id="bagian_footer_small_content">
+                <div class="col"id="logo_small">NOTY</div>
+                <div class="col"  id="bagian_footer_small_content"><hr>Universitas Multimedia Nusantara Jalan Scientia
+                Boulevard, Tangerang, Banten
+                </div>
+                <div class="col"  id="bagian_footer_small_content"><hr>
+                    Contact Us 
+                    <img onclick="githubRedirect()"class="gambar_contact"src="img/github-mark.png" width="50px" height="50px">
+                <img onclick="kirimEmail()" class="gambar_contact"src="img/gmaillogo.png" width="50px"height="50px">
+                
+                </div>
+        </div>
+
+        </div>
+    </div>
+        
+</body>
+</html>

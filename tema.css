@@ -1,0 +1,211 @@
+/* NOTY MAIN PAGE THEME
+Created by Hansrenee Willysandro from 
+www group */
+
+*{
+    margin: 0;
+}
+html{
+    width: 100%;
+    background-color: #e69138;
+    
+}
+
+#menuatas{
+    background-color:maroon;
+    color:white;
+}
+
+#tombol_masuk{
+    color:wheat;    
+    
+}
+
+#signin_note{
+    text-align: end;
+    
+}
+
+/* kelas col dan row digunakan untuk debugging */
+.col{
+    /* border-style: solid; */
+}
+
+.row{
+    /* border-style: solid; */
+}
+#register_content{
+
+    background-image: url("img/title1.jpg");
+    background-size: cover;
+    height:500px;
+}
+
+#register_center_div{
+    width:100%;
+    height: 100%;
+    margin-top:15%;
+    
+    font-size: 50px;
+    text-align: center;
+    color:#ebf442;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    
+}
+
+#btn_register_now{
+    background-color:#ebf442;
+    color:black;
+    font-size: 30px;
+    opacity: 0.85;
+}
+
+#whychoose{
+    background-image: url("img/whychoose.jpg");
+    background-size: cover;
+    /* background-color:orange; */
+    background-size: cover;
+    height:400px;
+}
+
+#chooseus_center_div{
+    width:100%;
+    height: 100%;
+    margin-top:2%;
+    margin-right: 50%;
+    
+    font-size: 50px;
+    text-align: right;
+    color:black;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.explain_title{
+    margin-right: 5%;
+    /* text-shadow: 2px 2px #707070; */
+    
+}
+
+.kotak1title{
+    width:20%;
+    height:30%;
+    float: left;
+    margin-left: 10%;
+    padding: auto;  
+    font-size: 20px;
+    text-align: center;
+    font-size:40%;
+    background-color:#e8b87a;
+    opacity: 0.8;
+    
+
+}
+
+#bagian_footer{
+    background-color: #e69138;
+    width:100%;
+    height:100px;
+
+}
+
+#bagian_footer{
+    text-align: center;
+    
+}
+
+#baris_footer{
+    font-size: 18px;
+}
+
+#bagian_footer_small{
+    display: none;
+    background-color: #e69138;
+}
+
+#bagian_footer_small_content{
+    text-align: center;
+}
+
+#logo_small{
+    font-size: 20px;
+    
+}
+
+
+
+.gambar_contact{
+    margin-left: 3%;
+    cursor: pointer;
+}
+#bagian_footer_small{
+    background-color: #e69138;
+}
+#bagian_footer_small_content{
+    background-color: #e69138;
+}
+
+
+@media screen and (max-width: 1000px) {
+    #chooseus_center_div{
+        width:100%;
+        height: 100%;
+        margin-top:8%;
+        margin-right: 10%;
+        
+        font-size: 35px;
+        text-align: right;
+        color:black;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+    .kotak1title{
+        width:50%;
+        height:15%;
+        margin-bottom: 2%;
+        
+    }
+    #bagian_footer_small{
+        display:inline;
+    }
+
+    #baris_footer{
+        display:none;
+    }
+}
+
+/* @media screen and (max-width: 763px) {
+   
+} */
+  @media screen and (max-width: 500px) {
+    #whychoose{
+        /* background-image: url("img/title1.jpg"); */
+        background-color:orange;
+        background-size: cover;
+        height:400px;
+        text-align: center;
+        
+    }
+    #chooseus_center_div{
+        width:100%;
+        height: 100%;
+        margin-top:8%;
+        margin-right: 10%;
+        
+        font-size: 25px;
+        text-align: center;
+        color:black;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+    .kotak1title{
+        width:70%;
+        height:15%;
+        font-size: 15px;
+        display:inline-table;
+        
+        margin-left: 15%;
+        margin-top:5%;
+        
+    
+    }
+
+
+}

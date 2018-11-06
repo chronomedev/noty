@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Register Form Noty</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css_form.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      
+      <ul class="nav navbar-nav">
+        <li><a class="navbar-brand" style="margin-bottom:13px;" href="#"><img src="icon_note.png"width="40px;" height="40px"></a></li>
+        <li><a href="#" style="color: white;">Home</a></li>
+        <li><a href="#" style="margin-left: 1100px;color:white;">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
+        
+    
+    <div class="container">
+        <h2> Registration Form</h2>
+        <div class="jumbotron col-md-12" style="margin-top: 100px;">
+            <form action="main.php?eType=form" method="POST">
+              <div class="form-group col-md-6">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" name="first_name" id="first_name"placeholder="Enter Your First Name">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="last_name">Last Name</label>
+                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Your Last Name">
+              </div>
+              <div class="form-group col-md-12">
+                <label for="user">Username</label>
+                <input type="text" class="form-control"name="username" id="user" placeholder="Enter Your Username">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="pw">Password</label>
+                <input type="password" class="form-control" name="password" id="pw"placeholder="Enter Your Password">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="con_pw">Password Confirmation</label>
+                <input type="password" class="form-control" id="con_pw" placeholder="Re-Enter Your Password">
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+            </form>
+
+
+</div>
+</div>
+
+    </body>
+    </html>
