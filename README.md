@@ -1,4 +1,4 @@
-# noty
+# NOTY
 Noty is a website to store notes
 A web based note storing services 
 
