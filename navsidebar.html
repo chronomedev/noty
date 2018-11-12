@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
 	<title>Main Menu</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="plugin/jQuery.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style_edit.css">
 	<link rel="stylesheet" type="text/css" href="responsive_navbar.css">
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<script src="script/animation_events.js"></script>
 	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 </head>
@@ -20,9 +22,9 @@
 				<font size="6"><span class="text-primary">N</span><span class="text-danger">o</span><span class="text-warning">t</span><span class="text-success">y</span></font>
 			</div>
 
-			<div class="col-md-1 col-sm-2 col-xs-4">
-				<a href="" class="glyphicon glyphicon-arrow-left"></a>
-			</div>
+			<!-- <div class="col-md-1 col-sm-2 col-xs-4">
+				<a href="" class="glyphicon glyphicon-arrow-left white"></a>
+			</div> -->
 
 			<div class="col-md-5 col-sm-8 col-xs-12">
 				<form action="/action_page.php">
@@ -37,13 +39,14 @@
 				</form>
 			</div>
 
-			<div class="col-md-1 col-md-offset-1 col-sm-6 col-sm-offset-3 col-xs-3">
-				<a href="#"><span class="glyphicon glyphicon-user"></span></a>
-			</div>
+			<span class="col-md-1">
+				<a href="#" class="white"><span class="glyphicon glyphicon-user white"></span></a>
+				
+			</span>
 
-			<div class="col-md-offset-1 col-sm-offset-1 col-xs-offset-3">
-				<a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-			</div>
+			<span class="col-md1" id="logout_icon">
+				<a href="#" class="white"><span class="glyphicon glyphicon-log-out white"></span> Logout</a>
+			</span>
 		</nav>
 		
 		<div class="sidenav border-right bg-white col-md-4">
@@ -56,6 +59,7 @@
 		</div>
 		<div class="col-sm-11" id="tempat_kerja"><h1>My Notes</h1>
 			<div class="list_notes">
+				<img class="add_icon" src="img/add_icon.png" width="75px" height="75px">
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
@@ -82,7 +86,7 @@
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div><div class="kotak_tes"></div>
+				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
@@ -93,7 +97,7 @@
 				<div class="kotak_tes"></div>
 
 			</div>
-		
+			
 		</div>
 		
 	</div>

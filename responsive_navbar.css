@@ -4,18 +4,50 @@
 }
 /* BUAT DEBUGGING DIATAS */
 
-
+@media only screen and (max-width:995px){
+  #logout_icon{
+    padding-top:10px;
+  }
+  a.white{
+    display: inline-block;
+  }
+  
+}
 @media only screen and (max-width:765px){
   body{
     margin-top:60px;
-
+    
+  }
+  #tempat_kerja{
+    text-align: center;
+    align-content: center;
+  }
+  .kotak_tes{
+    margin: 30px;
   }
   .sidenav{
   	margin-top:100px;
   }
+  
+
+  .add_icon{
+    margin-top:290px;
+  }
 }
 
-
+@media only screen and (max-width:380px){
+  body{
+    
+    padding-top: 100px;
+    padding-left:160px;
+    width: 100%;
+  }
+  .kotak_tes{
+    width: 150px;
+    height: 100px;
+    margin: 30px;
+  }
+}
 /* @media only screen and (max-width: 990px) and (min-width: 576px)  {
   
 } */

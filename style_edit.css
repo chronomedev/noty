@@ -43,12 +43,10 @@ body{
 .bawah{
 	margin-bottom: 20px;
 }
-
 a{
 	margin: 10px;
 	padding: 10px;
-	transition: all .6s ease-out;
-  display: block;
+  	display: block;
 }
 
 form{
@@ -93,9 +91,22 @@ button.addnew:hover {
 	box-shadow: inset 0 0 0 3px #3a7999;
 }
 
+.glyphicon-log-out{
+	margin-right: 5px;
+}
+
+div > a:hover > .glyphicon{
+	color: yellow;
+}
+
 a.text-dark:hover{
 	background-color: black;
 	color:white !important;
+}
+
+a.white:hover{
+	color: yellow;
+	text-decoration: none;
 }
 
 .kanan{
@@ -120,3 +131,23 @@ a.text-dark:hover{
 #navbar_user{
 	background:maroon;
 }
+
+.white{
+	color: white;
+}
+
+/* tombol floating add css */
+
+.add_icon{
+	position: fixed;
+	right: 20px;
+	margin-top: 350px;
+	bottom:0;
+	margin-bottom: 20px;
+}
+
+.add_icon:hover{
+	cursor: pointer;
+}
+
+
