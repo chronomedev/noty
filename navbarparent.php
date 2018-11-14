@@ -1,3 +1,14 @@
+<?php
+
+    require("connection.php");
+    session_start();
+    $passing_id = $_SESSION['passing_id'];
+    $passing_nama = $_SESSION['first_name'];
+
+
+
+?>
+
 <nav class="navbar border-bottom navbar-dark bg-white navbar-fixed-top" id="navbar_user">
 			<div class="col-md-1 col-sm-2 col-xs-8">
 				<font size="6"><span class="text-primary">N</span><span class="text-danger">o</span><span class="text-warning">t</span><span class="text-success">y</span></font>
@@ -21,7 +32,7 @@
 			</div>
 
 			<span class="col-md-2">
-				<a href="#" class="white">Hi Hansrenee!</a>
+				<a href="#" class="white">Hi <?php echo $passing_nama?></a>
 			</span>
 			<span class="col-md-1">
 				<a href="#" class="white"><span class="glyphicon glyphicon-user white"></span></a>

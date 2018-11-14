@@ -7,9 +7,9 @@
         
         public function insertDatabase($koneksi, $namadpn, $namablkg, $password, $username){
             // try{
-                $query = "insert into msuser(first_name, last_name, password, username)values(?,?,?,?)";
+                $query = "insert into msuser(first_name, last_name, password, username, foto)values(?,?,?,?,?)";
                 $sqlCommand = $koneksi->prepare($query);
-                $sqlCommand->execute([$namadpn, $namablkg, $password, $username]);
+                $sqlCommand->execute([$namadpn, $namablkg, $password, $username, "ehhh"]);
 
             // } catch (PDOException $e){
             //     echo "waduh gagal";
@@ -19,18 +19,22 @@
         public function logInDatabase($koneksi, $username, $password){
             session_start();
             $eh;
-            $query = "select id_user from msuser where username='$username' AND password='$password';";
+            $query = "select id_user, first_name from msuser where username='$username' AND password='$password';";
             //$sqlCommand = $koneksi->prepare($query);
             //$sqlCommand->execute([$username, $password]);
             $hasil = $koneksi->query($query);
-            while($eh = $hasil->fetch()){
-                $a = $eh['id_user'];
+            while($tampung = $hasil->fetch()){
+                $a = $tampung['id_user'];
+                $b = $tampung['first_name'];
+                //echo var_dump($a);
             }
             if($a== null){
                 echo "username atau passsword salah";
             } else {
                 $_SESSION['passing_id'] = $a;
-                echo "<script>window.location.assign('profiledit.php')</script>";
+                $_SESSION['first_name'] = $b;
+                //echo "<script>window.location.assign('profiledit.php')</script>";
+                echo "<script>window.location.assign('dashboard.php')</script>";
             }
 
             // if($hasil->fetch()==null){
