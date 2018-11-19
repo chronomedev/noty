@@ -138,28 +138,17 @@ a.white:hover{
 
 /* tombol floating add css */
 
-.add_icon{
-	position: fixed;
-	right: 20px;
-	margin-top: 350px;
-	bottom:0;
-	margin-bottom: 20px;
-}
-
-.add_icon:hover{
-	cursor: pointer;
-}
-
 #plus{
-	position: absolute;
+	position: fixed;
 	right: 0;
 	bottom: 0;
 	text-decoration: none;
 	font-size: 50px;
-	color: crimson;
+	color: red;
 	transition: 0.3s;
+	text-shadow: 1px 1px 10px #272634;
 }
 
 #plus:hover{
-	color: #29b5ce;
+	color: darkred;
 }

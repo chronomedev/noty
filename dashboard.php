@@ -12,6 +12,7 @@
 	<script src="script/animation_events.js"></script>
 	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -24,7 +25,6 @@
         ?>
 		<div class="col-sm-11" id="tempat_kerja"><h1>My Notes</h1>
 			<div class="list_notes">
-				<img class="add_icon" src="img/add_icon.png" width="75px" height="75px">
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
@@ -64,7 +64,7 @@
 			</div>
 			
 		</div>
-		
+		<a href="#" class="fa fa-plus-circle" id="plus"></a>
 	</div>
 	
 </body>
