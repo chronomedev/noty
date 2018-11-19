@@ -129,7 +129,7 @@ a.white:hover{
 }
 
 #navbar_user{
-	background:maroon;
+	background:crimson;
 }
 
 .white{
@@ -150,4 +150,16 @@ a.white:hover{
 	cursor: pointer;
 }
 
+#plus{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	text-decoration: none;
+	font-size: 50px;
+	color: crimson;
+	transition: 0.3s;
+}
 
+#plus:hover{
+	color: #29b5ce;
+}
