@@ -18,15 +18,16 @@
 
         public function logInDatabase($koneksi, $username, $password){
             session_start();
-            $eh;
             $query = "select id_user, first_name from msuser where username='$username' AND password='$password';";
             //$sqlCommand = $koneksi->prepare($query);
             //$sqlCommand->execute([$username, $password]);
+            
             $hasil = $koneksi->query($query);
+            // var_dump($hasil);
             while($tampung = $hasil->fetch()){
                 $a = $tampung['id_user'];
                 $b = $tampung['first_name'];
-                //echo var_dump($a);
+                
             }
             if($a== null){
                 echo "username atau passsword salah";

@@ -1,7 +1,8 @@
 <?php
-    session_start();
+    //session_start();
     require_once('connection.php');
     require('kelasDatabase.php');
+    include('navbarparent.php');//-->session start();
 
     $id_user = $_SESSION['passing_id'];
 
@@ -16,11 +17,11 @@
 <head>
         <title>Main Menu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="plugin/bootstrap.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="plugin/jQuery.js"></script>
         <script src="script/input_checker.js"></script>
     <link rel="stylesheet" type="text/css" href="style_edit.css">
+    <link rel="stylesheet" type="text/css" href="responsive_navbar.css">
     <link rel="stylesheet" type="text/css" href="profile_edit.css">
     <link rel="stylesheet" href="warningnotification.css"/>
     
@@ -29,37 +30,21 @@
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 </head>
 <body>
+        <!--- BUAT NOTIFIKASI WARNING JANGAN DI RUBAH -->
         <div class="row" id="warningnotif">
                 <div class="col">
                         <div class="dialogwarning">
-                        ERRORRR!!!!<hr>
-                        <p class="warning_content">Password Lama haurs di isi!</p>
-                        <button style="color:black;"onclick="closeWarning()">tutup</button>
-                        </div>
-                        
-                        
+                                ERRORRR!!!!<hr>
+                                <p class="warning_content">Password Lama haurs di isi!</p>
+                                <button style="color:black;"onclick="closeWarning()">tutup</button>
+                        </div>                        
                 </div>
         </div>
+        <!------------------------------------------------------------------------------------------->
 	<div class="container-fluid">
-		<nav class="navbar border-bottom navbar-dark bg-white justify-content-between navbar-fixed-top col-md-12">
-			<div class="container-fluid">
-			<div class="navbar-brand kanan col-md-1"><font size="6"><span class="text-primary">N</span><span class="text-danger">o</span><span class="text-warning">t</span><span class="text-success">y</span></font></div>
-			<a href="" class="glyphicon glyphicon-arrow-left col-md-offset-1"></a>
-			<form class="navbar-form navbar-left col-md-3" action="/action_page.php">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" name="search">
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit">
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
-			</form>
-			<div class="col-md-offset-6">
-			<a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-		</div>
-		</div>
-		</nav>
+                <?php
+                        displayNavbar();
+                ?>
 
 		<div class="container-fluid">
                 <h2 class="judul">EDIT PROFILE</h2>
