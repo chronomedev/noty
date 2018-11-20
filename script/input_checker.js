@@ -13,6 +13,7 @@ function closeWarning(){
     $(".container-fluid").fadeIn(500);
     
 }
+
 function emptyChecker(){
     var masukan= document.getElementsByClassName('form-control')[5].value;
    
@@ -23,11 +24,13 @@ function emptyChecker(){
     } else{
         $.ajax({
             type : "POST",
-            url : "../ambilajax.php",
-            data : { halo : masukan},
+            url : "ambilajax.php",
+            data : { 'halo' : masukan},
             success: function(data){
-                console.log("Async sukses");
-                //window.location.assign('../ambilajax.php');
+                window.alert("Berhasil Update Profile!");
+            },
+            error : function(data){
+                window.alert("Gagal melakukan update ke database. Silahkan coba lagi.");
             }
         });
     }
