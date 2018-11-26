@@ -2,3 +2,13 @@
     margin-top: 120px;
    text-align: center;
 }
+
+.thumb{
+	margin: 10px 5px 0 0 !important;
+	width:250px;
+}
+
+body{
+	font-family: Roboto;
+	padding:2px !important;
+}

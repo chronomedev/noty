@@ -34,16 +34,18 @@
             } else {
                 $_SESSION['passing_id'] = $a;
                 $_SESSION['first_name'] = $b;
+                $_SESSION['passing_pilihan_kategori'] = 'K'.$a.'01';
+                $categoryID_parameter = 'K'.$a.'01';
                 //echo "<script>window.location.assign('profiledit.php')</script>";
-                echo "<script>window.location.assign('dashboard.php')</script>";
+                echo "<script>window.location.assign('dashboard.php?ctg=$categoryID_parameter')</script>";
             }
-
             // if($hasil->fetch()==null){
             //     echo "username atau password salah";
             // } else {
                 
             // }
         }
+        
 
         public function displayUserDetails($koneksi, $id, $instruksi){
             if($instruksi == "low"){
@@ -61,23 +63,4 @@
         }
 
     }
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

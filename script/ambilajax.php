@@ -13,7 +13,7 @@
     $query = "insert into ajaxkampret(inputan)values(?);";
     $sqlCommand = $koneksi->prepare($query);
     $sqlCommand->execute([$a]);
-    //echo "masuk ke db";
+    echo "masuk ke db";
 
 
     

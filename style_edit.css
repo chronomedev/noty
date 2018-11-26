@@ -100,7 +100,7 @@ div > a:hover > .glyphicon{
 }
 
 a.text-dark:hover{
-	background-color: black;
+	background-color: crimson;
 	color:white !important;
 }
 
@@ -124,8 +124,22 @@ a.white:hover{
 .kotak_tes{
 	width: 100px;
 	height: 100px;
+	transition: 0.3s;
 	border-style: solid;
+	padding-top:4%;
 	margin: 50px;
+	text-align: center;
+	
+	/* display: flex;
+	flex-wrap: wrap; */
+}
+
+.kotak_tes:hover{
+	transition: 0.3s;
+	border-color: crimson;
+	cursor: pointer;
+	background-color: brown;
+	color:white;
 }
 
 #navbar_user{

@@ -1,62 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Register Form Noty</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css_form.css" />
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Register Form Noty</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="form.css">
+  <link rel="stylesheet" href="plugin/bootstrap-material-design.css"/>
+  <script src="script/redirect.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="script/input_checker.js"></script>
 </head>
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      
-      <ul class="nav navbar-nav">
-        <li><a class="navbar-brand" style="margin-bottom:13px;" href="#"><img src="icon_note.png"width="40px;" height="40px"></a></li>
-        <li><a href="#" style="color: white;">Home</a></li>
-        <li><a href="#" style="margin-left: 1100px;color:white;">Sign In</a></li>
-      </ul>
-    </div>
-  </nav>
+  <nav class="navbar navbar-expand-lg" id="menuatas">
+   <!-- <a class="navbar-brand" href="#">NOTY</a> -->
+   <div class="col"><img src="img/logo.png" width="50px" height="50px"></div>
+   <div class="col" id="signin_note" style="color: white;">Already have an account?</div>
+   <button type="button" onclick="signIn()"class="btn btn-outline-warning" id="tombol_masuk" style="color:yellow;">Sign-in</button>
+ </nav>
+
+ <div class="container-fluid">
+   <div class="card col-md-6 offset-md-3">
+    <p class="text-center"><font size="6"><span class="text-primary">N</span><span class="text-danger">o</span><span class="text-warning">t</span><span class="text-success">y</span></font></p>
+    <h2 class="card-header info-color white-text text-center"><strong>Registration Form</strong>
+    </h2>
+
+    <div class="card-body">
+      <form id="register_form"action="main.php?eType=form" method="POST">
+
+        <div class="form-row">
+          <div class="col-md-6 jarak">
+            <input type="text" id="first_name" name="first_name"class="form-control" required>
+            <label class="form-control-placeholder" for="first_name">First Name</label>
+          </div>
+          <div class="col-md-6 jarak">
+            <input type="text" id="last_name" name="last_name" class="form-control" required>
+            <label class="form-control-placeholder" for="last_name">Last Name</label>
+          </div>
+        </div>
         
-    
-    <div class="container">
-        <h2> Registration Form</h2>
-        <div class="jumbotron col-md-12" style="margin-top: 100px;">
-            <form action="main.php?eType=form" method="POST">
-              <div class="form-group col-md-6">
-                <label for="first_name">First Name</label>
-                <input type="text" class="form-control" name="first_name" id="first_name"placeholder="Enter Your First Name">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="last_name">Last Name</label>
-                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Your Last Name">
-              </div>
-              <div class="form-group col-md-12">
-                <label for="user">Username</label>
-                <input type="text" class="form-control"name="username" id="user" placeholder="Enter Your Username">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="pw">Password</label>
-                <input type="password" class="form-control" name="password" id="pw"placeholder="Enter Your Password">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="con_pw">Password Confirmation</label>
-                <input type="password" class="form-control" id="con_pw" placeholder="Re-Enter Your Password">
-              </div>
-              <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-            </form>
+        <div class="form-row">
+          <div class="col-md-12 jarak">
+            <input type="text" id="user" name="username"class="form-control" required>
+            <label class="form-control-placeholder" for="user">Username
+            </label>
+          </div>
+        </div>
 
-
-</div>
+        <div class="form-row">
+          <div class="col-md-6 jarak">
+            <input type="password" id="pw" name="password"class="form-control" required>
+            <label class="form-control-placeholder" for="pw">Password
+            </label>
+          </div>
+          <div class="col-md-6 jarak">
+            <input type="password" id="con_pw" class="form-control" required>
+            <label class="form-control-placeholder" for="con_pw">Confirm
+            </label>
+          </div>
+        </div>
+        <button type="button" onclick="MatchPassword()" class="btn btn-raised biru offset-md-10">Register</button>
+      </form>
+    </div>
+  </div>
 </div>
 
-    </body>
-    </html>
+</body>
+</html>

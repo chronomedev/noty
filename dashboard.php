@@ -18,14 +18,24 @@
 	
 	<div class="container-fluid">
         <?php
-        
 		include "navbarparent.php";
+		$pilihan_kategori = $_GET['ctg'];
 		displayNavbar();
-		displaySideNavbar();
+		displaySideNavbar($pilihan_kategori);
         
         ?>
 		<div class="col-sm-11" id="tempat_kerja"><h1>My Notes</h1>
 			<div class="list_notes">
+				<?php
+					//include("connection.php");
+
+					$queryNote= $koneksi->query("select nama from msnote where id_category = '$pilihan_kategori';");
+					while($listNote = $queryNote->fetch()){
+						echo "<div class='kotak_tes'>".$listNote['nama']."</div>";
+					}
+				
+				?>
+				<div class="kotak_tes">hhhhhhhhhhhhhhhhh</div>
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
@@ -42,25 +52,7 @@
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
 				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
+
 
 			</div>
 			

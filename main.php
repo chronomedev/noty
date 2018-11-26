@@ -21,12 +21,9 @@
         
         
     } else if($eventType == "update"){
-
+        
     }
     
-
-    
-
     //buat debug
     // $dbHandler->insertDatabase($koneksi, "ehhh", "doh", $pwod, "kampret123");
 

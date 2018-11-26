@@ -14,6 +14,20 @@ function closeWarning(){
     
 }
 
+function MatchPassword(){
+
+    var pw1 = document.getElementsByTagName("input")[3].value;
+    var pw2 = document.getElementsByTagName("input")[4].value;
+    
+    console.log("pw1 = " + pw1 +" pw2 = " + pw2);
+
+    if(pw1!=pw2){
+        window.alert("PASSWORD YANG DI MASUKAN HARUS SAMA!");
+    } else {
+        document.getElementById("register_form").submit();
+    }
+}
+
 function emptyChecker(){
     var masukan= document.getElementsByClassName('form-control')[5].value;
    
@@ -28,6 +42,7 @@ function emptyChecker(){
             data : { 'halo' : masukan},
             success: function(data){
                 window.alert("Berhasil Update Profile!");
+                //document.getElementsByClassName("container-fluid")[0].innerHTML = data;
             },
             error : function(data){
                 window.alert("Gagal melakukan update ke database. Silahkan coba lagi.");

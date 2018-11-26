@@ -1,0 +1,62 @@
+.navbar {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+  
+.form-control-placeholder {
+  position: absolute;
+  top: 0;
+  padding-top: 7px;
+  transition: all 200ms;
+  opacity: 0.5;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+  font-size: 90%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+  color: blue;
+}
+
+.jarak{
+	margin-bottom: 25px;
+}
+
+.card{
+	margin-top: 70px;
+}
+
+.biru{
+	color: white !important;
+	background-color: blue !important;
+	border-radius: 3px !important;
+}
+
+.biru:hover{
+	color: blue !important;
+	background-color: white !important;
+}
+
+.links{
+	color: blue;
+	background-color: white;
+}
+
+.links:hover{
+	color: crimson;
+}
+
+.navbar{
+	background-color: crimson;
+}
+
+#signin_note{
+    text-align: end;
+}
