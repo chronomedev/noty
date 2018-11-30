@@ -22,6 +22,8 @@
         
     } else if($eventType == "update"){
         
+    } else if($eventType == "addnote"){
+        
     }
     
     //buat debug

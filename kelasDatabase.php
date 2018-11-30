@@ -16,6 +16,10 @@
             // }
         }
 
+        public function insertNote($koneksi, $id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori){
+            $query = $koneksi->prepare("insert into msnote(id_note, nama, note_content, tanggal, id_category)values(?,?,?,?,?);");
+            $query->execute([$id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori]);
+        }
         public function logInDatabase($koneksi, $username, $password){
             session_start();
             $query = "select id_user, first_name from msuser where username='$username' AND password='$password';";

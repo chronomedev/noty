@@ -4,12 +4,14 @@
     session_start();
     $passing_id = $_SESSION['passing_id'];
 	$passing_nama = $_SESSION['first_name'];
+
+	$kategori_sebelumnya = $_SESSION['kategori_sebelumnya'];
 	//$passing_pilihan_kategori = $_SESSION['passing_pilihan_kategori'];
 
 	function displayNavbar(){
 		?><nav class="navbar border-bottom navbar-dark bg-white navbar-fixed-top" id="navbar_user">
 		<div class="col-md-1 col-sm-2 col-xs-8">
-			<a style="margin:0; text-decoration: none;"href="dashboard.php">
+			<a style="margin:0; text-decoration: none;" href="dashboard.php?ctg=<?php global $passing_id; echo "K".$passing_id."01"?>">
 				<font size="6"><span class="text-primary">N</span><span class="text-danger">o</span><span class="text-warning">t</span><span class="text-success">y</span></font>
 			</a>
 		</div>
