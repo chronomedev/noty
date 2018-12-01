@@ -14,48 +14,25 @@
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 </head>
 <body>
-
+	
 	
 	<div class="container-fluid">
-		<nav class="navbar border-bottom navbar-dark bg-white navbar-fixed-top" id="navbar_user">
-			<div class="col-md-1 col-sm-2 col-xs-8">
-				<font size="6"><span class="text-primary">N</span><span class="text-danger">o</span><span class="text-warning">t</span><span class="text-success">y</span></font>
-			</div>
+        <?php
+            include("navbarparent.php");
+            require("kelasDatabase.php");
 
-			<!--<div class="col-md-1 col-sm-2 col-xs-4">
-				<a href="" class="glyphicon glyphicon-arrow-left white"></a>
-			</div>-->
+            if(!isset($_GET['ctg'])){
+                $pilihan_kategori = null;
+                displayNavbar();
+		        displaySideNavbar($pilihan_kategori);     
+        
+            }
+           
+            $dbHandler = new databaseLibrary();
 
-			<div class="col-md-6 col-sm-10 col-xs-16">
-				<form action="/action_page.php">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search" name="search" value="">
-						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit">
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-						</div>
-					</div>
-				</form>
-			</div>
-
-			<div class="col-md-1 col-md-offset-1 col-sm-6 col-sm-offset-3 col-xs-3">
-				<a href="#" class="white"><span class="glyphicon glyphicon-user white"></span></a>
-			</div>
-
-			<div class="col-md-offset-1 col-sm-offset-1 col-xs-offset-3 blue">
-				<a href="#" class="white"><span class="glyphicon glyphicon-log-out white"></span> Logout</a>
-			</div>
-		</nav>
-		
-		<div class="sidenav border-right bg-white col-md-4">
-			<p class="text-dark tengah turun">Manage Category</p>
-			<a href="#about" class="text-dark">All</a>
-			<a href="#services" class="text-dark">Kampus</a>
-			<a href="#clients" class="text-dark">Kerja</a>
-			<a href="#contact" class="text-dark">Others</a>
-			<button type="button" class="btn btn-lg btn-primary addnew" style="margin: 10px;">Add new</button>
-		</div>
+            $detail_pengguna = $dbHandler->displayUserDetails($koneksi, $passing_id, "all");
+        
+        ?>
         
         <div>
                 <h2 style="text-align:center; margin-bottom: 20px;">My Profile</h2>
@@ -69,10 +46,18 @@
                         <a href="#" class="fa fa-google"></a>
                 </div>
                 <div class="col-md-3 text-center">
-                    <img  class="img-thumbnail" style="width:300px;" src="img/banner.jpg">
+                    <img  class="img-thumbnail" style="width:300px;" src="<?php
+
+                        if($detail_pengguna['foto_user'] == null){
+                            echo "img/avatars/defaultprofile.png";
+                        } else {
+                            echo $detail_pengguna['foto_user'];
+                        }
+                        
+                    ?>">
                 </div>
                 <div class="col-md-7">
-                    <h2>NAMA</h2>
+                    <h2><?php echo $detail_pengguna['NamaDepan']." ".$detail_pengguna['NamaBelakang']?></h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

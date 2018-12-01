@@ -7,9 +7,9 @@
         
         public function insertDatabase($koneksi, $namadpn, $namablkg, $password, $username){
             // try{
-                $query = "insert into msuser(first_name, last_name, password, username, foto)values(?,?,?,?,?)";
+                $query = "insert into msuser(first_name, last_name, password, username)values(?,?,?,?)";
                 $sqlCommand = $koneksi->prepare($query);
-                $sqlCommand->execute([$namadpn, $namablkg, $password, $username, "ehhh"]);
+                $sqlCommand->execute([$namadpn, $namablkg, $password, $username]);
 
             // } catch (PDOException $e){
             //     echo "waduh gagal";
@@ -20,6 +20,38 @@
             $query = $koneksi->prepare("insert into msnote(id_note, nama, note_content, tanggal, id_category)values(?,?,?,?,?);");
             $query->execute([$id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori]);
         }
+
+        public function getLastNote($koneksi, $id_kategori){
+            $tampung_id;
+            $query = $koneksi->query("select id_note from msnote where id_category='$id_kategori';");
+            $i = 0;
+            while($tampung=$query->fetch()){
+                $tampung_id[$i] = $tampung['id_note'];
+                $i++;
+            } 
+            
+            $ambil_id_terbesar = $tampung_id[count($tampung_id)-1];
+            
+            $pecah = str_split($ambil_id_terbesar);
+            $append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
+
+            return $append+1;
+        }
+
+        public function getFirstCategory($koneksi, $id_user){
+            $query = $koneksi->query("select id_category from mscategory where  id_user=$id_user;");
+
+            $tampung_id_Category;
+            $i=0;
+            while($tampung = $query->fetch()){
+                $tampung_id_Category[$i] = $tampung['id_category'];
+                $i++;
+            }
+            return $tampung_id_Category[0];
+            //echo var_dump($tampung_id_Category);
+        }
+
+        
         public function logInDatabase($koneksi, $username, $password){
             session_start();
             $query = "select id_user, first_name from msuser where username='$username' AND password='$password';";
@@ -28,6 +60,7 @@
             
             $hasil = $koneksi->query($query);
             // var_dump($hasil);
+            $tampung;
             while($tampung = $hasil->fetch()){
                 $a = $tampung['id_user'];
                 $b = $tampung['first_name'];
@@ -38,30 +71,54 @@
             } else {
                 $_SESSION['passing_id'] = $a;
                 $_SESSION['first_name'] = $b;
-                $_SESSION['passing_pilihan_kategori'] = 'K'.$a.'01';
-                $categoryID_parameter = 'K'.$a.'01';
+                $_SESSION['passing_kategori_awal'] = $this->getFirstCategory($koneksi, $a);
+                $categoryID_parameter = $this->getFirstCategory($koneksi, $a);
                 //echo "<script>window.location.assign('profiledit.php')</script>";
                 echo "<script>window.location.assign('dashboard.php?ctg=$categoryID_parameter')</script>";
             }
-            // if($hasil->fetch()==null){
-            //     echo "username atau password salah";
-            // } else {
-                
-            // }
+
         }
-        
+
 
         public function displayUserDetails($koneksi, $id, $instruksi){
             if($instruksi == "low"){
                 $query = "select first_name from msuser where id_user = '$id';";
             } else {
-                $query = "select first_name, last_name, username from msuser where id_user = '$id';";
+                $query = "select first_name, last_name, username, foto from msuser where id_user = '$id';";
                 $hasil = $koneksi->query($query);
                 $nama;
                  while($user_details = $hasil->fetch()){
-                    $user = array("NamaDepan"=>$user_details['first_name'], "NamaBelakang"=>$user_details['last_name'], "Username"=>$user_details['username']);
+                    $user = array("NamaDepan"=>$user_details['first_name'], 
+                    "NamaBelakang"=>$user_details['last_name'], 
+                    "Username"=>$user_details['username'],
+                    "foto_user" =>$user_details['foto']);
                 }
                 return $user;
+            }
+
+        }
+
+        public function updateUser($koneksi, $id_user, $first_name, $last_name, $password, $foto){
+
+            if($foto == null && $password==null){
+                $query = $koneksi->prepare("update msuser set first_name=?, last_name =? where id_user=?;");
+                $query->execute([$first_name, $last_name, $id_user]);
+                return "masuk 1";
+
+            } else if($password == null) {
+
+                $query = $koneksi->prepare("update msuser set first_name=?, last_name =?, foto=? where id_user=?;");
+                $query->execute([$first_name, $last_name, $foto, $id_user]);
+                return "masuk2";
+
+            } else if($foto == null) {
+                $query = $koneksi->prepare("update msuser set first_name=?, last_name =?, password = ? where id_user=?;");
+                $query->execute([$first_name, $last_name, $password, $id_user]);
+                return "masuk3";
+            } else{
+                $query = $koneksi->prepare("update msuser set first_name=?, last_name =?, password = ?, foto=? where id_user=?;");
+                $query->execute([$first_name, $last_name, $password, $foto, $id_user]);
+                return "masuk4";
             }
 
         }

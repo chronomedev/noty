@@ -36,17 +36,19 @@ function emptyChecker(){
         $(".container-fluid").hide();
        $("#warningnotif").fadeIn(500);
     } else{
-        $.ajax({
-            type : "POST",
-            url : "ambilajax.php",
-            data : { 'halo' : masukan},
-            success: function(data){
-                window.alert("Berhasil Update Profile!");
-                //document.getElementsByClassName("container-fluid")[0].innerHTML = data;
-            },
-            error : function(data){
-                window.alert("Gagal melakukan update ke database. Silahkan coba lagi.");
-            }
-        });
+        var form_update = document.getElementById("update_form");
+        form_update.submit();
+        // $.ajax({
+        //     type : "POST",
+        //     url : "ambilajax.php",
+        //     data : { 'halo' : masukan},
+        //     success: function(data){
+        //         window.alert("Berhasil Update Profile!");
+        //         //document.getElementsByClassName("container-fluid")[0].innerHTML = data;
+        //     },
+        //     error : function(data){
+        //         window.alert("Gagal melakukan update ke database. Silahkan coba lagi.");
+        //     }
+        // });
     }
 }

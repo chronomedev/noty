@@ -22,7 +22,7 @@
 		include "navbarparent.php";
 		$pilihan_kategori = $_GET['ctg'];
 		
-		displayNavbar($pilihan_kategori);
+		displayNavbar();
 		displaySideNavbar($pilihan_kategori);
 		//$_SESSION['kategori_sebelumnya'] = $pilihan_kategori;
         

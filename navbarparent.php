@@ -5,13 +5,13 @@
     $passing_id = $_SESSION['passing_id'];
 	$passing_nama = $_SESSION['first_name'];
 
-	$kategori_sebelumnya = $_SESSION['kategori_sebelumnya'];
+	//$kategori_sebelumnya = $_SESSION['kategori_sebelumnya'];
 	//$passing_pilihan_kategori = $_SESSION['passing_pilihan_kategori'];
 
 	function displayNavbar(){
 		?><nav class="navbar border-bottom navbar-dark bg-white navbar-fixed-top" id="navbar_user">
 		<div class="col-md-1 col-sm-2 col-xs-8">
-			<a style="margin:0; text-decoration: none;" href="dashboard.php?ctg=<?php global $passing_id; echo "K".$passing_id."01"?>">
+			<a style="margin:0; text-decoration: none;" href="dashboard.php?ctg=<?php echo $_SESSION['passing_kategori_awal']?>">
 				<font size="6"><span class="text-primary">N</span><span class="text-danger">o</span><span class="text-warning">t</span><span class="text-success">y</span></font>
 			</a>
 		</div>
@@ -34,14 +34,14 @@
 		</div>
 
 		<span class="col-md-2">
-			<a href="#" class="white">Hi <?php global $passing_nama; echo $passing_nama?></a>
+			<a href="profile.php" class="white">Hi <?php global $passing_nama; echo $passing_nama?></a>
 		</span>
 		<span class="col-md-1">
 			<a href="profiledit.php" class="white"><span class="glyphicon glyphicon-user white"></span></a>
 		</span>
 		
 		<span style="text-align: end;" class="col-md-2" id="logout_icon">
-			<a href="#" class="white"><span class="glyphicon glyphicon-log-out white"></span> Logout</a>
+			<a href="main.php?eType=out" class="white"><span class="glyphicon glyphicon-log-out white"></span> Logout</a>
 		</span>
 	</nav>	
 	<?php 
@@ -55,8 +55,7 @@
 			<?php
 			include("connection.php");
 			global $passing_id;
-			// $queryAmbilListNote = $koneksi->prepare("select category_name from mscategory where id_user = ?");
-			// $list_category = $queryAmbilListNote->execute([$passing_id]);
+			
 			$list_category = $koneksi->query("select category_name, id_category from mscategory where id_user = $passing_id");
 			//global $kategory_pilihan;
 			while($tampung = $list_category->fetch()){

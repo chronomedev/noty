@@ -5,10 +5,10 @@ require('kelasDatabase.php');
     include('navbarparent.php');//-->session start();
 
     $id_user = $_SESSION['passing_id'];
-
+    
     $dbHandler = new databaseLibrary();
 
-    $detail_pengguna = $dbHandler->displayUserDetails($koneksi, $id_user, 'sdf');
+    $detail_pengguna = $dbHandler->displayUserDetails($koneksi, $id_user, 'all');
     ?>
 
 
@@ -30,38 +30,40 @@ require('kelasDatabase.php');
     </head>
     <body>
         <!--- BUAT NOTIFIKASI WARNING JANGAN DI RUBAH -->
+
         <div class="row" id="warningnotif">
-            <div class="col">
+            <div class="col-10">
                 <div class="dialogwarning">
                     ERRORRR!!!!<hr>
                     <p class="warning_content">Password Lama haurs di isi!</p>
-                    <button style="color:black;"onclick="closeWarning()">tutup</button>
+                    <button class="btn btn-warning" id="buttonClose" onclick="closeWarning()"><b>TUTUP</b></button>
                 </div>                        
             </div>
         </div>
+
         <!------------------------------------------------------------------------------------------->
         <div class="container-fluid">
             <?php
             displayNavbar();
             ?>
                 <h2 class="judul">EDIT PROFILE</h2>
-                <form enctype="multipart/form-data">
+                <form id="update_form" enctype="multipart/form-data" action="main.php?eType=updateprofile" method="POST">
                     <div class="form-group col-md-6">
                         <label for="first_name">First Name</label>
-                        <input type='text' class='form-control' id='first_name'placeholder='Enter Your First Name' value=<?php echo $detail_pengguna['NamaDepan'];?>>
+                        <input type='text' class='form-control' name="first_name_update"id='first_name'placeholder='Enter Your First Name' value=<?php echo $detail_pengguna['NamaDepan'];?>>
 
                     </div>
                     <div class="form-group col-md-6">
                         <label for="last_name">Last Name</label>
-                        <input type="text" class="form-control" id="last_name"placeholder="Enter Your Last Name" value=<?php echo $detail_pengguna['NamaBelakang'];?>>
+                        <input type="text" class="form-control" name="last_name_update" id="last_name"placeholder="Enter Your Last Name" value=<?php echo $detail_pengguna['NamaBelakang'];?>>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username"placeholder="Enter Your username" value=<?php echo $detail_pengguna['Username']; ?>>
+                        <input type="text" class="form-control" name="user_name_update" id="username"placeholder="Enter Your username" value=<?php echo $detail_pengguna['Username']; ?>>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password"placeholder="Enter Your Password" value="">
+                        <input type="password" class="form-control" name="password_update" id="password"placeholder="Enter Your Password" value="">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="old-password">Old Password</label>
@@ -70,8 +72,15 @@ require('kelasDatabase.php');
                     <div class="form-group col-md-6">
                         <div class="bagian_upload_avatar"> 
                             <label>Upload Avatar mu!</label>
-                            <input type="file" id="file-input" multiple/>
-                            <div id="thumb-output"></div>
+                            <input type="file" name="avatar_user_upload" id="file-input" multiple/>
+                            <div id="thumb-output"><?php 
+                                if($detail_pengguna['foto_user']==null){
+                                    echo "<p>Belum ada avatar";
+                                } else {
+                                    echo "<img src='".$detail_pengguna['foto_user']."'>";
+                                }
+                            ?>
+                            </div>
                         </div>
                         
                     </div>
