@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="script/addnote_category.js"></script>
 </head>
 <body style="background:#fff4ea;">
 
@@ -37,27 +38,43 @@
 						echo "<div class='kotak_tes'>".$listNote['nama']."</div>";
 					}
 				?>
-				<div class="kotak_tes">hhhhhhhhhhhhhhhhh</div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
-				<div class="kotak_tes"></div>
+
 		</div> -->
 		<div class="col-sm-11" id="tempat_kerja"><h1>My Notes</h1>
 			<div class="list_notes" style="font-family:arial,sans-serif;">
 				<center>
 					<?php
 
-						$queryNote= $koneksi->query("select nama from msnote where id_category = '$pilihan_kategori';");
+						$queryNote= $koneksi->query("select id_note, nama, note_content from msnote where id_category = '$pilihan_kategori';");
+						$isNULL = false;
 						while($listNote = $queryNote->fetch()){
+							if($listNote['nama'] == null){
+								$isNULL = TRUE;
+							}
+							$overview = explode(" ", $listNote['note_content']);
+							$appendOverview = "";
+							for($i=0;$i<4;$i++){
+								if($i==count($overview)-1){
+									$appendOverview = $appendOverview;
+									break;
+								} else if($i==3){
+									$appendOverview = $appendOverview."...";
+								} else {
+									$appendOverview = $appendOverview.$overview[$i]." ";
+								}
+							}
+							
 							echo "<ul>
 									<li>
-										<a href='#'>
+										<a href='viewnote.php?nt=".$listNote['id_note']."&ctg=".$pilihan_kategori."'>
 											<h2>".$listNote['nama']."</h2>
-											<p>TEXT CONTENT</P>
+											<p>".$appendOverview."</P>
 										</a>
 									</li>
 								</ul";
+						}
+						if($isNULL){
+							echo "<h3 style='color:grey;'>Catatan Kosong</h3>";
 						}
 					?>
 				</center>

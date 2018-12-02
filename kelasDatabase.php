@@ -16,10 +16,6 @@
             // }
         }
 
-        public function insertNote($koneksi, $id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori){
-            $query = $koneksi->prepare("insert into msnote(id_note, nama, note_content, tanggal, id_category)values(?,?,?,?,?);");
-            $query->execute([$id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori]);
-        }
 
         public function getLastNote($koneksi, $id_kategori){
             $tampung_id;
@@ -29,13 +25,17 @@
                 $tampung_id[$i] = $tampung['id_note'];
                 $i++;
             } 
+            if($tampung_id == null){
+                return 1;
+            } else {
+                $ambil_id_terbesar = $tampung_id[count($tampung_id)-1];
             
-            $ambil_id_terbesar = $tampung_id[count($tampung_id)-1];
+                $pecah = str_split($ambil_id_terbesar);
+                $append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
+    
+                return $append+1;
+            }
             
-            $pecah = str_split($ambil_id_terbesar);
-            $append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
-
-            return $append+1;
         }
 
         public function getFirstCategory($koneksi, $id_user){
@@ -51,7 +51,83 @@
             //echo var_dump($tampung_id_Category);
         }
 
-        
+        public function getLastCategory($koneksi, $id_user){
+            $query = $koneksi->query("select id_category from mscategory where id_user = $id_user");
+
+            $tampung_id_category;
+            $i=0;
+            while($tampung = $query->fetch()){
+                $tampung_id_category[$i] = $tampung['id_category'];
+                $i++;
+            }
+            if($tampung_id_category == null){
+                return 1;
+
+            } else {
+                $ambil_terbesar = $tampung_id_category[count($tampung_id_category)-1];
+                 $pecah = str_split($ambil_terbesar);
+                $append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
+
+            return $append+1;
+
+            }
+            
+        }
+
+        public function insertNote($koneksi, $id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori){
+            $query = $koneksi->prepare("insert into msnote(id_note, nama, note_content, tanggal, id_category)values(?,?,?,?,?);");
+            $query->execute([$id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori]);
+        }
+
+        public function insertCategory($koneksi, $id_category, $category_name, $id_user){
+            $query = $koneksi->prepare("insert into mscategory(id_category, category_name, id_user)values(?,?,?);");
+            $query->execute([$id_category, $category_name, $id_user]);
+        }
+
+        public function displayNotes($koneksi, $id_note){
+           
+            $query = $koneksi->query("select nama, note_content, tanggal, foto from msnote where id_note ='$id_note'");
+            while($tampung = $query->fetch()){
+                $noteProperties = array(
+                    "id_note" => $id_note,
+                     "nama"=> $tampung['nama'],
+                     "note_content" => $tampung['note_content'],
+                     "tanggal" => $tampung['tanggal'],
+                     "foto" => $tampung['foto']
+                );
+            }
+            return $noteProperties;
+        }
+
+        public function deleteNotes($koneksi, $id_note){
+            $query = $koneksi->prepare("delete from msnote where id_note = ?");
+            $query->execute([$id_note]);
+        }
+
+        public function deleteCategory($koneksi, $id_category){
+            $this->deleteAllNotes($koneksi, $id_category);
+            $query = $koneksi->prepare("delete from mscategory where id_category=?");
+            $query->execute([$id_category]);
+        }
+
+        public function deleteAllNotes($koneksi, $id_category){
+            $query = $koneksi->prepare("delete from msnote where id_category =?");
+            $query->execute([$id_category]);
+        }
+
+        public function updateCategory($koneksi, $id_category, $nama_baru_kategori){
+            $query = $koneksi->prepare("update mscategory set category_name=? where id_category = ?");
+            $query->execute([$nama_baru_kategori, $id_category]);
+        }
+
+        public function updateNote($koneksi, $id_note, $name, $note_content, $tanggal, $foto){
+            $query = $koneksi->prepare("update msnote set nama=?, note_content =?, tanggal=?, foto=? where id_note = ?");
+            $query->execute([$name, $note_content, $tanggal, $foto, $id_note]);
+            
+        }
+
+
+
         public function logInDatabase($koneksi, $username, $password){
             session_start();
             $query = "select id_user, first_name from msuser where username='$username' AND password='$password';";

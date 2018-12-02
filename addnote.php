@@ -10,7 +10,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript" src="show.js"></script>
-    <script src="script/addnote.js"></script>
+    <script src="script/addnote_category.js"></script>
 </head>
 <body style="background:#fff4ea;">
 

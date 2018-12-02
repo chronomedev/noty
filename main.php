@@ -3,6 +3,7 @@
     // Main Event Handling (CRUD) server-side code
     // 2018 Hansrenee Willysandro
     // www web design and development
+
     require_once('connection.php');
     require('kelasDatabase.php');
     $dbHandler = new databaseLibrary();
@@ -12,8 +13,19 @@
     
 
     if($eventType == "form"){
-        $pwod = hash('sha256', $_POST['password']);
-        $dbHandler->insertDatabase($koneksi, $_POST['first_name'], $_POST['last_name'], $pwod, $_POST['username']);
+        try{
+            $pwod = hash('sha256', $_POST['password']);
+            $dbHandler->insertDatabase($koneksi, $_POST['first_name'], $_POST['last_name'], $pwod, $_POST['username']);
+            
+            echo "berhasil buat Akun!<br>";
+            sleep(10);
+            echo "Harap tunggu, anda akan di redirect!";
+            echo "<script>window.location.assign('login.html');</script>";
+        } catch(Exception $e){
+            echo "gagal buat akun. Coba lagi nanti";
+        }
+        
+        
 
     } else if($eventType == "login") {
         $pwod = hash('sha256', $_POST['password']);
@@ -26,6 +38,52 @@
         
 
     } else if($eventType == "updatenote"){
+        echo var_dump($_POST['instruksi_update']);
+        echo var_dump($_POST['id_note_update']);
+        echo var_dump($_FILES['gambar_note_upload']);
+
+        if(isset($_POST['instruksi_update'])){
+            session_start();
+            if($_POST['instruksi_update'] == "delete"){
+                $dbHandler->deleteNotes($koneksi, $_POST['id_note_update']);
+                echo "<script>window.location.assign('dashboard.php?ctg=".$_SESSION['pass_kategori_update']."')</script>";
+            } else {
+                if($_FILES['gambar_note_upload']['size'] == 0){
+                    $direktoriFile = null;
+                } else {
+                    $direktoriFile = "img/note_images/".$_FILES['gambar_note_upload']['name'];
+                    move_uploaded_file($_FILES['gambar_note_upload']['tmp_name'], $direktoriFile);
+                }
+                $waktu = date('Y-m-d h:i:s', time());
+                $dbHandler->updateNote($koneksi, $_POST['id_note_update'], $_POST['judul_note'], $_POST['isi_catatan'], $waktu, $direktoriFile);
+                echo "masuk";
+                echo "<script>window.location.assign('viewnote.php?nt=".$_POST['id_note_update']."&ctg=".$_SESSION['pass_kategori_update']."');</script>";
+            }
+            
+        } else {
+            echo "data gak lengkap. Coba lagi!";
+        }
+        
+
+    } else if($eventType == "updatectg"){
+
+        session_start();
+        if($_POST['pilihan_instruksi'] == "delete"){
+
+            $dbHandler->deleteCategory($koneksi, $_POST['id_kategori_pilihan']);
+
+        } else {
+            $dbHandler->updateCategory($koneksi, $_POST['id_kategori_pilihan'], $_POST['nama_category_edit']);
+        }
+
+        $categoryID_parameter = $dbHandler->getFirstCategory($koneksi, $_SESSION['passing_id']);
+        echo "<script>window.location.assign('dashboard.php?ctg=$categoryID_parameter')</script>";
+
+    } else if($eventType == "addctg"){
+        session_start();
+        $angka_id_kategori = $dbHandler->getLastCategory($koneksi, $_SESSION['passing_id']);
+        $id_category_add = "K".$_SESSION['passing_id'].$angka_id_kategori;
+        $dbHandler->insertCategory($koneksi, $id_category_add, $_POST['category_add'], $_SESSION['passing_id']);
         
 
     } else if($eventType == "addnote"){
@@ -64,6 +122,8 @@
 
         $categoryID_parameter = $dbHandler->getFirstCategory($koneksi, $id_user_edit);
         echo "<script>window.location.assign('dashboard.php?ctg=$categoryID_parameter')</script>";
+
+
     }
 
 ?>

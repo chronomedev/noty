@@ -71,13 +71,9 @@
 			}
 			?>
 
-			<!-- <a href="#about" class="text-dark">Default</a> -->
-			<!-- <a href="#services" class="text-dark">Kampus</a>
-			<a href="#clients" class="text-dark">Kerja</a>
-			<a href="#contact" class="text-dark">Others</a> -->
 			<div>
-				<button type="button" class="btn btn-lg btn-primary addnew" style="margin: 10px; width: 100px;">Edit</button>
-				<button type="button" class="btn btn-lg btn-primary addnew" style="margin: 10px;width:100px;">New</button>
+				<button type="button" onclick="editCategory('<?php echo $kategori_pilihan; ?>');" class="btn btn-lg btn-primary addnew" style="margin: 10px; width: 100px;">Edit</button>
+				<button type="button" onclick="addCategoryPage();" class="btn btn-lg btn-primary addnew" style="margin: 10px;width:100px;">New</button>
 			</div>
 			
 		</div>

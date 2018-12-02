@@ -52,3 +52,11 @@ function emptyChecker(){
         // });
     }
 }
+
+
+
+function emptyCheckerGeneral(){
+    var form = document.getElementById("add_category_form");
+    form.submit();
+
+}
