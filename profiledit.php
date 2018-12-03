@@ -27,6 +27,7 @@ require('kelasDatabase.php');
         <script src="script/input_checker.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
         <script type="text/javascript" src="show.js"></script>
+        <script src="script/security.js"></script>
     </head>
     <body>
         <!--- BUAT NOTIFIKASI WARNING JANGAN DI RUBAH -->
@@ -66,8 +67,8 @@ require('kelasDatabase.php');
                         <input type="password" class="form-control" name="password_update" id="password"placeholder="Enter Your Password" value="">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="old-password">Old Password</label>
-                        <input type="password" class="form-control" id="old-password"placeholder="Enter Your Old Password">
+                        <label for="old-password">Old Password -- <?php if(isset($_GET['war'])){ echo "<label style='color:red;'>PASSWORD SALAH</label>";} ?></label>
+                        <input type="password" name="old_password" class="form-control" id="old-password"placeholder="Enter Your Old Password">
                     </div>
                     <div class="form-group col-md-6">
                         <div class="bagian_upload_avatar"> 

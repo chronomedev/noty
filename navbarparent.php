@@ -49,7 +49,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	function displaySideNavbar($kategori_pilihan){
 		?>
-		<div class="sidenav border-right bg-white col-md-4" >
+		<div class="sidenav bg-info col-md-4" >
 			<p class="text-dark tengah turun">Note Categories</p>
 
 			<?php
@@ -72,7 +72,10 @@
 			?>
 
 			<div>
-				<button type="button" onclick="editCategory('<?php echo $kategori_pilihan	; ?>');" class="btn btn-lg btn-primary addnew" style="margin: 10px; width: 100px;">Edit</button>
+			<?php if($kategori_pilihan != null){?>
+				<button type="button" onclick="editCategory('<?php echo $kategori_pilihan;?>');" class="btn btn-lg btn-primary addnew" style="margin: 10px; width: 100px;">Edit</button>
+			<?php }?>
+				
 				<button type="button" onclick="addCategoryPage();" class="btn btn-lg btn-primary addnew" style="margin: 10px;width:100px;">New</button>
 			</div>
 			

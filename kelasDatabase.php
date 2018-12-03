@@ -25,7 +25,7 @@
                 $tampung_id[$i] = $tampung['id_note'];
                 $i++;
             } 
-            if($tampung_id == null){
+            if(!isset($tampung_id)){
                 return 1;
             } else {
                 $ambil_id_terbesar = $tampung_id[count($tampung_id)-1];
@@ -81,6 +81,38 @@
             
         }
 
+        public function matchOldPassword($koneksi, $old_password, $id_user){
+            $query = $koneksi->prepare("select password from msuser where id_user =?");
+            $query->execute([$id_user]);
+            while($tampung = $query->fetch()){
+                if($tampung['password'] == $old_password){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public function unchiper($chipertext){
+            $alfabet = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+            'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+                'u', 'v', 'w', 'x', 'y', 'z');
+        
+            $karakterSwitch = array('z', 'y', 'x', 'w', 'v', 'u', 't', 's', 'r', 'q',
+                'p', 'o', 'n', 'm', 'l', 'k', 'j', 'i', 'h', 'g',
+                'f', 'e', 'd', 'c', 'b', 'a');
+
+            $append ="";
+            $pecah = str_split($chipertext);
+            for($i=0;$i<count($pecah);$i++){
+                for($z=0;$z<count($karakterSwitch);$z++){
+                    if($pecah[$i]== $karakterSwitch[$z]){
+                        $append = $append.$alfabet[$z];
+                    }
+                }
+            }
+            return $append;
+        }
+
         public function insertNote($koneksi, $id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori){
             $query = $koneksi->prepare("insert into msnote(id_note, nama, note_content, tanggal, id_category)values(?,?,?,?,?);");
             $query->execute([$id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori]);
@@ -128,8 +160,13 @@
         }
 
         public function updateNote($koneksi, $id_note, $name, $note_content, $tanggal, $foto){
-            $query = $koneksi->prepare("update msnote set nama=?, note_content =?, tanggal=?, foto=? where id_note = ?");
-            $query->execute([$name, $note_content, $tanggal, $foto, $id_note]);
+            if($foto == null){
+                $query = $koneksi->prepare("update msnote set nama=?, note_content =?, tanggal=? where id_note = ?");
+                $query->execute([$name, $note_content, $tanggal, $id_note]);
+            } else {
+                $query = $koneksi->prepare("update msnote set nama=?, note_content =?, tanggal=?, foto=? where id_note = ?");
+                $query->execute([$name, $note_content, $tanggal, $foto, $id_note]);
+            }
             
         }
 
@@ -181,6 +218,7 @@
 
         }
 
+        
         public function updateUser($koneksi, $id_user, $first_name, $last_name, $password, $foto){
 
             if($foto == null && $password==null){

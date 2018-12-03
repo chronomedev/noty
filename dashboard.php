@@ -79,7 +79,7 @@
 									</li>
 								</ul";
 						}
-						if($listNote == false){
+						if(!isset($listNote)){
 							echo "<h3 style='color:grey;'>Catatan Kosong</h3>";
 						}
 					?>

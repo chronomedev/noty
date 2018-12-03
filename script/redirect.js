@@ -17,3 +17,13 @@ function signIn(){
 function isiForm(){
     window.location.assign("form.html");
 }
+
+
+function userLogin(){
+    var form = document.getElementById("form_login");
+    var ambilpw = document.getElementById("exampleInputPassword1").value;
+    console.log(ambilpw);
+    document.getElementById("exampleInputPassword1").value= chiper(ambilpw);
+    console.log(chiper(ambilpw));
+    form.submit();
+}

@@ -14,7 +14,8 @@
 
     if($eventType == "form"){
         try{
-            $pwod = hash('sha256', $_POST['password']);
+            $pwod_unlock = $dbHandler->unchiper($_POST['password']);
+            $pwod = hash('sha256', $pwod_unlock);
             $dbHandler->insertDatabase($koneksi, $_POST['first_name'], $_POST['last_name'], $pwod, $_POST['username']);
             
             echo "berhasil buat Akun!<br>";
@@ -28,7 +29,8 @@
         
 
     } else if($eventType == "login") {
-        $pwod = hash('sha256', $_POST['password']);
+        $pwod_unlock = $dbHandler->unchiper($_POST['password']);
+        $pwod = hash('sha256', $pwod_unlock);
         $dbHandler->logInDatabase($koneksi, $_POST['username'], $pwod);
         
     } else if($eventType == "out"){
@@ -101,29 +103,40 @@
     } else if($eventType == "updateprofile"){
         
         session_start();
-        if(!isset($_POST['password_update']) || $_POST['password_update'] == ""){
-            $pwod = null;
+        if(!isset($_POST['old_password'])){
+            echo "UPDATE PROFILE GAGAL. SILAHKAN COBA LAGI NANTI";
         } else {
-            $pwod = hash('sha256', $_POST['password_update']);
-            //echo "HASHHHHHHHHHH MASUK";
-        }
-        $id_user_edit = $_SESSION['passing_id'];
-
-        if(!isset($_FILES['avatar_user_upload'])|| $_FILES['avatar_user_upload']['size']==0){
-            $avatar_path = null;
-        } else {
-            $avatar_path = "img/avatars/".$_FILES['avatar_user_upload']['name'];
-            move_uploaded_file($_FILES['avatar_user_upload']['tmp_name'], $avatar_path);
-        }
-        echo var_dump($_FILES['avatar_user_upload']);
-
-        echo $dbHandler->updateUser($koneksi, $id_user_edit, $_POST['first_name_update'], $_POST['last_name_update'], $pwod, $avatar_path);
+            $pwod_unlock = $dbHandler->unchiper($_POST['old_password']);
+            $pwodlama = hash('sha256', $pwod_unlock);
+            if($dbHandler->matchOldPassword($koneksi, $pwodlama, $_SESSION['passing_id'])){
+                if(!isset($_POST['password_update']) || $_POST['password_update'] == ""){
+                    $pwod = null;
+                } else {
+                    $pwod_unlock = $dbHandler->unchiper($_POST['password_update']);
+                    $pwod = hash('sha256', $pwod_unlock);
+                    //echo "HASHHHHHHHHHH MASUK";
+                }
+                $id_user_edit = $_SESSION['passing_id'];
         
-        $_SESSION['first_name'] = $_POST['first_name_update'];
-
-        $categoryID_parameter = $dbHandler->getFirstCategory($koneksi, $id_user_edit);
-        echo "<script>window.location.assign('dashboard.php?ctg=$categoryID_parameter')</script>";
-
+                if(!isset($_FILES['avatar_user_upload'])|| $_FILES['avatar_user_upload']['size']==0){
+                    $avatar_path = null;
+                } else {
+                    $avatar_path = "img/avatars/".$_FILES['avatar_user_upload']['name'];
+                    move_uploaded_file($_FILES['avatar_user_upload']['tmp_name'], $avatar_path);
+                }
+                echo var_dump($_FILES['avatar_user_upload']);
+        
+                echo $dbHandler->updateUser($koneksi, $id_user_edit, $_POST['first_name_update'], $_POST['last_name_update'], $pwod, $avatar_path);
+                
+                $_SESSION['first_name'] = $_POST['first_name_update'];
+        
+                $categoryID_parameter = $dbHandler->getFirstCategory($koneksi, $id_user_edit);
+                echo "<script>window.location.assign('dashboard.php?ctg=$categoryID_parameter')</script>";
+            } else {
+                //echo var_dump($pwod_unlock);
+                echo "<script>window.location.assign('profiledit.php?war=1')</script>";
+            } 
+        }
 
     }
 

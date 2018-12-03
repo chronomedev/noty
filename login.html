@@ -10,12 +10,14 @@
 	<script src="popper.min.js"></script>
 	<script src="plugin/bootstrap-material-design.js"></script>
 	<link rel="stylesheet" type="text/css" href="responsive_navbar.css">
+	<script src="script/security.js"></script>
+	<script src="script/redirect.js"></script>
 </head>
 <body>
 
 	<div class="container">
 		<div class="loginbox col-md-6">
-			<form class="center_div" action="main.php?eType=login" method="POST">
+			<form class="center_div" id="form_login" action="main.php?eType=login" method="POST">
 				<p class="tengah"><font size="6"><span class="text-primary">N</span><span class="text-danger">o</span><span class="text-warning">t</span><span class="text-success">y</span></font></p>
 				<p class="tengah bawah">Sign in</p>
 				<div class="form-group">
@@ -33,7 +35,7 @@
 				</div>
 				<div class="form-row" style="margin-top: 70px;">
 					<a href="form.html" class="text-left col-md-3 turun links" id="buatakun" style="text-decoration: none;"><b>Buat akun</b></a>
-					<button type="submit" class="col-md-3 offset-md-5 turun btn btn-raised biru text-center">Login</button>
+					<button type="button" onclick="userLogin();" class="col-md-3 offset-md-5 turun btn btn-raised biru text-center">Login</button>
 				</div>
 			</form>
 		</div>

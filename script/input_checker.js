@@ -24,12 +24,15 @@ function MatchPassword(){
     if(pw1!=pw2){
         window.alert("PASSWORD YANG DI MASUKAN HARUS SAMA!");
     } else {
+        document.getElementsByTagName("input")[3].value = chiper(pw1);
+        console.log(chiper(pw1));
         document.getElementById("register_form").submit();
     }
 }
 
 function emptyChecker(){
     var masukan= document.getElementsByClassName('form-control')[5].value;
+    var masukanpassword = document.getElementsByClassName('form-control')[4].value;
    
     console.log(masukan);
     if(masukan == null || masukan == ""){
@@ -37,6 +40,13 @@ function emptyChecker(){
        $("#warningnotif").fadeIn(500);
     } else{
         var form_update = document.getElementById("update_form");
+        var lock = chiper(masukanpassword);
+        var lockold = chiper(masukan);
+        if(lock == "" || lock == null){
+            lock = null;
+        }
+        document.getElementsByClassName('form-control')[5].value = lockold;
+        document.getElementsByClassName('form-control')[4].value = lock;
         form_update.submit();
         // $.ajax({
         //     type : "POST",

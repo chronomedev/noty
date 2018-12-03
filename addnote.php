@@ -56,8 +56,7 @@
                                                         while($tampung = $queryAmbil->fetch()){
                                                             $kategori_passing_js = $tampung['id_category'];
                                                             echo "<a class='dropdown-item' id=".$kategori_passing_js." href='javascript:getCategory(".$kategori_passing_js.");'>".$tampung['category_name']."</a>";
-                                                            // $tampung_id_kategori[$i] = $tampung['id_category'];
-                                                            // $tampung_nama_kategori[$i] = $tampung['category_name'];
+
                                                             $i++;                                                
                                                         }
                                                     
