@@ -47,9 +47,15 @@
                 $tampung_id_Category[$i] = $tampung['id_category'];
                 $i++;
             }
-            return $tampung_id_Category[0];
-            //echo var_dump($tampung_id_Category);
-        }
+
+            if(isset($tampung_id_Category)){
+                return $tampung_id_Category[0];
+
+            } else {
+                return null;
+            }
+            
+    }
 
         public function getLastCategory($koneksi, $id_user){
             $query = $koneksi->query("select id_category from mscategory where id_user = $id_user");
@@ -60,17 +66,18 @@
                 $tampung_id_category[$i] = $tampung['id_category'];
                 $i++;
             }
-            if($tampung_id_category == null){
-                return 1;
-
-            } else {
+            if(isset($tampung_id_category)){
                 $ambil_terbesar = $tampung_id_category[count($tampung_id_category)-1];
                  $pecah = str_split($ambil_terbesar);
                 $append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
 
             return $append+1;
 
+
+            } else {
+                return 1;
             }
+            
             
         }
 

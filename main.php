@@ -84,6 +84,7 @@
         $angka_id_kategori = $dbHandler->getLastCategory($koneksi, $_SESSION['passing_id']);
         $id_category_add = "K".$_SESSION['passing_id'].$angka_id_kategori;
         $dbHandler->insertCategory($koneksi, $id_category_add, $_POST['category_add'], $_SESSION['passing_id']);
+        echo "<script>window.location.assign('dashboard.php?ctg=".$id_category_add."');</script>";
         
 
     } else if($eventType == "addnote"){

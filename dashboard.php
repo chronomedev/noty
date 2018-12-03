@@ -21,7 +21,13 @@
 	<div class="container-fluid">
         <?php
 		include "navbarparent.php";
-		$pilihan_kategori = $_GET['ctg'];
+
+		if(isset($_GET['ctg'])){
+			$pilihan_kategori = $_GET['ctg'];
+		} else {
+			$pilihan_kategori = null;
+		}
+		
 		
 		displayNavbar();
 		displaySideNavbar($pilihan_kategori);
@@ -73,7 +79,7 @@
 									</li>
 								</ul";
 						}
-						if($isNULL){
+						if($listNote == false){
 							echo "<h3 style='color:grey;'>Catatan Kosong</h3>";
 						}
 					?>

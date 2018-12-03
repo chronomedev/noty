@@ -72,7 +72,7 @@
 			?>
 
 			<div>
-				<button type="button" onclick="editCategory('<?php echo $kategori_pilihan; ?>');" class="btn btn-lg btn-primary addnew" style="margin: 10px; width: 100px;">Edit</button>
+				<button type="button" onclick="editCategory('<?php echo $kategori_pilihan	; ?>');" class="btn btn-lg btn-primary addnew" style="margin: 10px; width: 100px;">Edit</button>
 				<button type="button" onclick="addCategoryPage();" class="btn btn-lg btn-primary addnew" style="margin: 10px;width:100px;">New</button>
 			</div>
 			

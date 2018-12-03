@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="responsive_navbar.css">
 	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <script src="script/addnote_category.js"></script>
 </head>
 <body>
 	
