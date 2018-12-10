@@ -21,9 +21,9 @@
 		</div> -->
 
 		<div class="col-md-6 col-sm-10 col-xs-16">
-			<form action="/action_page.php">
+			<form action="main.php?eType=search" method="POST">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" name="search" value="">
+					<input type="text" class="form-control" placeholder="Search" name="cari_note value="">
 					<div class="input-group-btn">
 						<button class="btn btn-default" type="submit">
 							<i class="glyphicon glyphicon-search"></i>
@@ -58,6 +58,12 @@
 			
 			$list_category = $koneksi->query("select category_name, id_category from mscategory where id_user = $passing_id");
 			//global $kategory_pilihan;
+			if($kategori_pilihan == "all"){
+				echo "<a href='dashboard.php?ctg=all' class='text-dark' style='color:crimson;'>All</a>";
+			} else {
+				echo "<a href='dashboard.php?ctg=all' class='text-dark'>All</a>";
+			}
+
 			while($tampung = $list_category->fetch()){
 				$a = $tampung['category_name'];
 				$b = $tampung['id_category'];

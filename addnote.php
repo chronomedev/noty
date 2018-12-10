@@ -34,7 +34,7 @@
         ?>
         
         <div class="row" id="editnote_container">
-                <form action="main.php?eType=addnote" method="POST" jumbotron col-md-12" style="grid-gap: 1em;">
+                <form action="main.php?eType=addnote" method="POST" jumbotron col-md-12" style="grid-gap: 1em;" enctype="multipart/form-data">
                         <h2 style="text-align: center;">New Note</h2>
                         <div class="form-group col-md-6 col-md-offset-3">
                                 <label for="title">Title</label>
@@ -55,7 +55,8 @@
                                                         $i = 0;
                                                         while($tampung = $queryAmbil->fetch()){
                                                             $kategori_passing_js = $tampung['id_category'];
-                                                            echo "<a class='dropdown-item' id=".$kategori_passing_js." href='javascript:getCategory(".$kategori_passing_js.");'>".$tampung['category_name']."</a>";
+                                                            $pecah = explode("-", $kategori_passing_js); 
+                                                            echo "<a class='dropdown-item' id=".$kategori_passing_js." href='javascript:getCategory($pecah[1]);'>".$tampung['category_name']."</a>";
 
                                                             $i++;                                                
                                                         }

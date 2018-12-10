@@ -16,7 +16,34 @@
             // }
         }
 
+        public function noteSearch($koneksi, $id_kategori, $nama_note){
+            $query = $koneksi->query("select id_note, note_content, tanggal from msnote where id_kategori='$id_kategori' and nama='$nama_note';");
+            
+            while($tampung = $query->fetch()){
+                $note_property = array(
+                    "id_note" => $tampung['id_note'],
+                    "note_content" => $tampung['note_content'],
+                    "tanggal" => $tampung['tanggal']
+                );
+            }
+            return $note_property;
+        }
 
+        public function getAllCategory($koneksi, $id_user){
+            $query= $koneksi->query("select id_category from mscategory where id_user=$id_user");
+            $tampung_kategori = array();
+            $i = 0;
+            while($tampung = $query->fetch()){
+                $tampung_kategori[$i] = $tampung['id_category'];
+                $i++;
+            }
+            if(!isset($tampung_kategori)){
+                $tampung_kategori = null;
+            }
+
+            return $tampung_kategori;
+        }
+        
         public function getLastNote($koneksi, $id_kategori){
             $tampung_id;
             $query = $koneksi->query("select id_note from msnote where id_category='$id_kategori';");
@@ -25,15 +52,20 @@
                 $tampung_id[$i] = $tampung['id_note'];
                 $i++;
             } 
+            echo var_dump($tampung_id);
+            
             if(!isset($tampung_id)){
                 return 1;
             } else {
                 $ambil_id_terbesar = $tampung_id[count($tampung_id)-1];
-            
-                $pecah = str_split($ambil_id_terbesar);
-                $append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
-    
-                return $append+1;
+                echo var_dump($ambil_id_terbesar)."<br>";
+                $pecah = explode("-", $ambil_id_terbesar);
+                echo var_dump($pecah)."<br>";
+                //$append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
+                $konversiNomor = (int)$pecah[2];
+                echo var_dump($konversiNomor);
+                return $konversiNomor+1;
+                //return $append+1;
             }
             
         }
@@ -68,11 +100,12 @@
             }
             if(isset($tampung_id_category)){
                 $ambil_terbesar = $tampung_id_category[count($tampung_id_category)-1];
-                 $pecah = str_split($ambil_terbesar);
-                $append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
+                 $pecah = explode("-", $ambil_terbesar);
+                //$append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
 
-            return $append+1;
-
+                $konversi_angka = (int)$ambil_terbesar[1];
+                echo var_dump($konversi_angka);
+             return $konversi_angka+1;
 
             } else {
                 return 1;
@@ -113,9 +146,9 @@
             return $append;
         }
 
-        public function insertNote($koneksi, $id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori){
-            $query = $koneksi->prepare("insert into msnote(id_note, nama, note_content, tanggal, id_category)values(?,?,?,?,?);");
-            $query->execute([$id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori]);
+        public function insertNote($koneksi, $id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori, $foto){
+            $query = $koneksi->prepare("insert into msnote(id_note, nama, note_content, tanggal, id_category, foto)values(?,?,?,?,?,?);");
+            $query->execute([$id_note, $judul_note, $isi_note, $tanggal_note, $id_kategori, $foto]);
         }
 
         public function insertCategory($koneksi, $id_category, $category_name, $id_user){

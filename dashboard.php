@@ -29,29 +29,25 @@
 		}
 		
 		
-		displayNavbar();
+		displayNavbar();/////-->session start
 		displaySideNavbar($pilihan_kategori);
 		//$_SESSION['kategori_sebelumnya'] = $pilihan_kategori;
         
         ?>
-		<!-- <div class="col-sm-11" id="tempat_kerja"><h1>My Notes</h1>
-			<div class="list_notes">
-				<?php
-					//include("connection.php");
+		
 
-					$queryNote= $koneksi->query("select nama from msnote where id_category = '$pilihan_kategori';");
-					while($listNote = $queryNote->fetch()){
-						echo "<div class='kotak_tes'>".$listNote['nama']."</div>";
-					}
-				?>
-
-		</div> -->
+	
 		<div class="col-sm-11" id="tempat_kerja"><h1>My Notes</h1>
 			<div class="list_notes" style="font-family:arial,sans-serif;">
 				<center>
 					<?php
 
-						$queryNote= $koneksi->query("select id_note, nama, note_content from msnote where id_category = '$pilihan_kategori';");
+						if($pilihan_kategori == "all"){
+							$queryNote= $koneksi->query("select * from msnote inner join mscategory on msnote.id_category = mscategory.id_category AND mscategory.id_user = $passing_id;");
+						} else {
+							$queryNote= $koneksi->query("select id_note, nama, note_content from msnote where id_category = '$pilihan_kategori';");
+						}
+						
 						$isNULL = false;
 						while($listNote = $queryNote->fetch()){
 							if($listNote['nama'] == null){

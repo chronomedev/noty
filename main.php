@@ -11,8 +11,28 @@
     
     $eventType= $_GET['eType'];
     
+    if($eventType == "search"){
+        session_start();
+        // if(isset($_GET['cari_search'])){
+        //     $query_search = $_GET['cari_search'];
 
-    if($eventType == "form"){
+        //     $list_kategori = $dbHandler->getAllCategory($koneksi, $_SESSION['passing_id']);
+        //     $list_search = array();
+        //     if($list_kategori!=null){
+        //         for($i=0;$i<count($list_kategori);$i++){
+        //             array_push($list_kategori[$i], $dbHandler->noteSearch($koneksi, $list_kategori[$i], $_GET['cari_search']));
+        //         }
+        //     } else {
+        //         echo "<sript>window.location.assign('search.php')</script>";
+        //     }
+            
+        // } else if($_GET['q']==""){
+        //     echo "<sript>window.location.assign('search.php')</script>";
+        // }
+
+        
+
+    } else if($eventType == "form"){
         try{
             $pwod_unlock = $dbHandler->unchiper($_POST['password']);
             $pwod = hash('sha256', $pwod_unlock);
@@ -84,7 +104,7 @@
     } else if($eventType == "addctg"){
         session_start();
         $angka_id_kategori = $dbHandler->getLastCategory($koneksi, $_SESSION['passing_id']);
-        $id_category_add = "K".$_SESSION['passing_id'].$angka_id_kategori;
+        $id_category_add = "K".$_SESSION['passing_id']."-".$angka_id_kategori;
         $dbHandler->insertCategory($koneksi, $id_category_add, $_POST['category_add'], $_SESSION['passing_id']);
         echo "<script>window.location.assign('dashboard.php?ctg=".$id_category_add."');</script>";
         
@@ -94,11 +114,26 @@
         date_default_timezone_get();
         $waktu = date('Y-m-d h:i:s', time());
         session_start();
-        $passing_id = $_SESSION['passing_id'];
-        $id_note = "N".$passing_id.$dbHandler->getLastNote($koneksi, $_POST['kategori_note']);
-        $dbHandler->insertNote($koneksi, $id_note, $_POST['judul_note'], $_POST['isi_catatan'], $waktu, $_POST['kategori_note']);
 
-        echo "<script>window.location.assign('dashboard.php?ctg=".$_POST['kategori_note']."')</script>";
+        if(isset($_FILES['gambar_upload']) && ($_FILES['gambar_upload']['name']!="" || $_FILES['gambar_upload']['name'] != null)){
+            //echo "masuk di fies isset";
+            //echo var_dump($_FILES['gambar_upload']);
+            $direktoriFile = "img/note_images/".$_FILES['gambar_upload']['name'];
+            move_uploaded_file($_FILES['gambar_upload']['tmp_name'], $direktoriFile);
+
+        } else {
+
+            $direktoriFile = null;
+        }
+        $passing_id = $_SESSION['passing_id'];
+        $id_kategori_sambung = "K".$passing_id."-".$_POST['kategori_note'];
+        $note_angka = $_POST['kategori_note'];
+        //echo var_dump($pecah_kategori_note);
+        $id_note = "N".$passing_id."-".$note_angka."-".$dbHandler->getLastNote($koneksi, $id_kategori_sambung);
+        echo $id_note;
+        $dbHandler->insertNote($koneksi, $id_note, $_POST['judul_note'], $_POST['isi_catatan'], $waktu, $id_kategori_sambung, $direktoriFile);
+
+        echo "<script>window.location.assign('dashboard.php?ctg=".$id_kategori_sambung."')</script>";
 
     } else if($eventType == "updateprofile"){
         
