@@ -34,7 +34,7 @@
         ?>
         
         <div class="row" id="editnote_container">
-                <form action="main.php?eType=addnote" method="POST" jumbotron col-md-12" style="grid-gap: 1em;" enctype="multipart/form-data">
+                <form action="main.php?eType=addnote" id="addform_note" method="POST" jumbotron col-md-12" style="grid-gap: 1em;" enctype="multipart/form-data">
                         <h2 style="text-align: center;">New Note</h2>
                         <div class="form-group col-md-6 col-md-offset-3">
                                 <label for="title">Title</label>
@@ -67,10 +67,10 @@
                                                   <a class="dropdown-item" href="#">Kerja</a>
                                                   <a class="dropdown-item" href="#">Others</a> -->
                                                 </div>
-                                                <input type="hidden" name="kategori_note" class="kategori_note" value="">
+                                                <input type="hidden" name="kategori_note" class="kategori_note" value="0">
                                                 <input type="file" name="gambar_upload" id="file-input" class="posisi" multiple />
                                                    <div id="thumb-output"></div>
-                                                <button type="submit" class="btn btn-primary btn-block posisi" style="width: 160px;">Create Note</button>
+                                                <button type="button" onclick="addNoteChecker();" class="btn btn-primary btn-block posisi" style="width: 160px;">Create Note</button>
             
                                               </div>
                                 </div>

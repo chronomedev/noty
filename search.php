@@ -19,77 +19,55 @@
 
 		$dbHandler = new databaseLibrary();
 		
-		if(isset($_GET['cari_search'])){
-            $query_search = $_GET['cari_search'];
+		if(isset($_GET['q_search'])){
+            $query_search = $_GET['q_search'];
 
-            $list_kategori = $dbHandler->getAllCategory($koneksi, $_SESSION['passing_id']);
-            $list_search = array();
-            if($list_kategori!=null){
-                for($i=0;$i<count($list_kategori);$i++){
-                    array_push($list_kategori[$i], $dbHandler->noteSearch($koneksi, $list_kategori[$i], $_GET['cari_search']));
-                }
-            } else {
-                echo "<sript>window.location.assign('search.php')</script>";
-            }
             
         } else if($_GET['q']==""){
             echo "<sript>window.location.assign('search.php')</script>";
         }
 
 		?>
-		<div class="row">
-			<div class="example-1 card">
-				<div class="wrapper" style="background: url(img/note_images/default_user_note.png) center/cover no-repeat;">
-					<div class="date">
-						<span class="day" name="day" value="">12</span>
-						<span class="month" name="month" value="">Aug</span>
-						<span class="year" name="year" value="">2016</span>
-					</div>
-					<div class="data">
-						<div class="content">
-							<span class="author" name="category" valei="">Category</span>
-							<h1 class="title" name="title" value=""><a href="#">J.Fla is love, J.Fla is live ༼ つ ◕_◕ ༽つ J.Fla TAKE MY ENERGY ༼ つ ◕_◕ ༽つ</a></h1>
-							<p class="text" name="text" value="">The highly anticipated world championship fight will take place at 10am and is the second major boxing blockbuster in the nation after 20 years.</p>
-							<label for="show-menu" class="menu-button"><span></span></label>
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<div class="example-1 card">
-				<div class="wrapper" style="background: url(img/note_images/default_user_note.png) center/cover no-repeat;">
-					<div class="date">
-						<span class="day" name="day" value="">12</span>
-						<span class="month" name="month" value="">Aug</span>
-						<span class="year" name="year" value="">2016</span>
-					</div>
-					<div class="data">
-						<div class="content">
-							<span class="author" name="category" valei="">Category</span>
-							<h1 class="title" name="title" value=""><a href="#">J.Fla is love, J.Fla is live ༼ つ ◕_◕ ༽つ J.Fla TAKE MY ENERGY ༼ つ ◕_◕ ༽つ</a></h1>
-							<p class="text" name="text" value="">The highly anticipated world championship fight will take place at 10am and is the second major boxing blockbuster in the nation after 20 years.</p>
-							<label for="show-menu" class="menu-button"><span></span></label>
-						</div>
+		<div class="row">
+		<?php
+		
+
+		// $query = $koneksi->prepare("select * from msnote inner join mscategory on msnote.id_category = mscategory.id_category AND mscategory.id_user = $passing_id AND msnote.nama = ?;");
+		$query = $koneksi->query("select * from msnote inner join mscategory on msnote.id_category = mscategory.id_category AND mscategory.id_user = $passing_id AND msnote.nama = '$query_search';");
+		// $query->execute([$query_search]);
+		while($tampung = $query->fetch()){
+			if($tampung['foto']==null || $tampung['foto']==""){
+				$pathfoto = "img/note_images/default_user_note.png";
+			} else {
+				$pathfoto = $tampung['foto'];
+			}
+			$pecahWaktu = explode("-", $tampung['tanggal']);
+			// if($pecahWaktu[1] == 1)
+			$ambil_tanggal = explode(" ", $pecahWaktu[2]);
+			$konvertMonth = $dbHandler->getMonth(intval($pecahWaktu[1]));
+
+			echo '<div class="example-1 card">
+			<div class="wrapper" style="background: url('.$pathfoto.') center/cover no-repeat;">
+				<div class="date">
+					<span class="day" name="day" value="">'.$ambil_tanggal[0].'</span>
+					<span class="month" name="month" value="">'.$konvertMonth.'</span>
+					<span class="year" name="year" value="">'.$pecahWaktu[0].'</span>
+				</div>
+				<div class="data">
+					<div class="content">
+						<h1 class="title" name="title" value=""><a href="viewnote.php?nt='.$tampung['id_note'].'&ctg='.$tampung['id_category'].'">'.$tampung['nama'].'</a></h1>
+						<p class="text" name="text" value="">'.$tampung['note_content'].'</p>
+						<label for="show-menu" class="menu-button"><span></span></label>
 					</div>
 				</div>
 			</div>
-			<div class="example-1 card">
-				<div class="wrapper" style="background: url(img/note_images/default_user_note.png) center/cover no-repeat;">
-					<div class="date">
-						<span class="day" name="day" value="">12</span>
-						<span class="month" name="month" value="">Aug</span>
-						<span class="year" name="year" value="">2016</span>
-					</div>
-					<div class="data">
-						<div class="content">
-							<span class="author" name="category" valei="">Category</span>
-							<h1 class="title" name="title" value=""><a href="#">J.Fla is love, J.Fla is live ༼ つ ◕_◕ ༽つ J.Fla TAKE MY ENERGY ༼ つ ◕_◕ ༽つ</a></h1>
-							<p class="text" name="text" value="">The highly anticipated world championship fight will take place at 10am and is the second major boxing blockbuster in the nation after 20 years.</p>
-							<label for="show-menu" class="menu-button"><span></span></label>
-						</div>
-					</div>
-				</div>
-			</div>
+		</div>';
+		}
+
+		
+		?>
+
 		</div>
 </body>
 </html>

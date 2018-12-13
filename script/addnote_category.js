@@ -59,3 +59,16 @@ function editCategory(id_kategori_masukan){
     window.location.assign("editcategory.php?ctg="+id_kategori_masukan);
 
 }
+
+
+function addNoteChecker(){
+    var form = document.getElementById("addform_note");
+    var kategori_value = document.getElementsByClassName("kategori_note")[0].value  ;
+    if(kategori_value == null || kategori_value=="0"){
+        window.alert("Pilih lah kategori terlebih dahulu di bawah field isi note");
+    } else {
+        form.submit();
+        //console.log(kategori_value);
+    }
+    
+}

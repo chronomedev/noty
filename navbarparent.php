@@ -21,9 +21,9 @@
 		</div> -->
 
 		<div class="col-md-6 col-sm-10 col-xs-16">
-			<form action="main.php?eType=search" method="POST">
+			<form action="search.php" method="GET">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" name="cari_note value="">
+					<input type="text" class="form-control" placeholder="Search" name="q_search">
 					<div class="input-group-btn">
 						<button class="btn btn-default" type="submit">
 							<i class="glyphicon glyphicon-search"></i>

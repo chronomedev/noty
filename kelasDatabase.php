@@ -5,6 +5,35 @@
     class databaseLibrary{ 
 
         
+
+        public function getMonth($masukan){
+            if($masukan == 1 || $masukan == 01){
+                return "Jan";
+            } else if($masukan == 2 || $masukan == "02"){
+                return "Feb";
+            }else if($masukan == 3 || $masukan == "03"){
+                return "Mar";
+            } else if($masukan == 4 || $masukan == "04"){
+                return "Apr";
+            } else if($masukan == 5 || $masukan == "05"){
+                return "May";
+            } else if($masukan == 6 || $masukan == "06"){
+                return "Jun";
+            }else if($masukan == 7 || $masukan == "07"){
+                return "Jul";
+            } else if($masukan == 8 || $masukan == "08"){
+                return "Aug";
+            } else if($masukan == 9 || $masukan == "09"){
+                return "Sept";
+            } else if($masukan == 10){
+                return "Oct";
+            } else if($masukan == 11){
+                return "Nov";
+            } else {
+                return "Dec";
+            }
+        }
+        
         public function insertDatabase($koneksi, $namadpn, $namablkg, $password, $username){
             // try{
                 $query = "insert into msuser(first_name, last_name, password, username)values(?,?,?,?)";
@@ -52,19 +81,26 @@
                 $tampung_id[$i] = $tampung['id_note'];
                 $i++;
             } 
-            echo var_dump($tampung_id);
+
             
             if(!isset($tampung_id)){
                 return 1;
             } else {
-                $ambil_id_terbesar = $tampung_id[count($tampung_id)-1];
-                echo var_dump($ambil_id_terbesar)."<br>";
-                $pecah = explode("-", $ambil_id_terbesar);
-                echo var_dump($pecah)."<br>";
-                //$append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
-                $konversiNomor = (int)$pecah[2];
+
+                //loop untuk ngambil buntut notenya nanti di sort
+                $list_notes;
+                for($z = 0;$z<count($tampung_id);$z++){
+                    $pecah = explode("-", $tampung_id[$z]);
+                    $list_notes[$z] = intval($pecah[2]);
+                }
+
+                
+                rsort($list_notes);
+                
+                
+                $konversiNomor = (int)$list_notes[0]+1;
                 echo var_dump($konversiNomor);
-                return $konversiNomor+1;
+                return $konversiNomor;
                 //return $append+1;
             }
             
@@ -87,7 +123,9 @@
                 return null;
             }
             
-    }
+        }
+
+        
 
         public function getLastCategory($koneksi, $id_user){
             $query = $koneksi->query("select id_category from mscategory where id_user = $id_user");
@@ -98,14 +136,24 @@
                 $tampung_id_category[$i] = $tampung['id_category'];
                 $i++;
             }
+            echo var_dump($tampung_id_category);
             if(isset($tampung_id_category)){
-                $ambil_terbesar = $tampung_id_category[count($tampung_id_category)-1];
-                 $pecah = explode("-", $ambil_terbesar);
-                //$append = $pecah[count($pecah)-2].$pecah[count($pecah)-1];
 
-                $konversi_angka = (int)$ambil_terbesar[1];
-                echo var_dump($konversi_angka);
-             return $konversi_angka+1;
+                $list_ctg_pecah;
+                for($z = 0;$z<count($tampung_id_category);$z++){
+                    $pecah = explode("-", $tampung_id_category[$z]);
+
+                    $list_ctg_pecah[$z] = intval($pecah[1]);
+                }
+
+                rsort($list_ctg_pecah);
+                // $ambil_terbesar = $tampung_id_category[count($tampung_id_category)-1];
+                //  $pecah = explode("-", $ambil_terbesar);
+
+                
+                // $konversi_angka = (int)$pecah[1];
+                // echo var_dump($konversi_angka);
+             return $list_ctg_pecah[0]+1;
 
             } else {
                 return 1;

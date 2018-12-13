@@ -8,6 +8,10 @@
     require('kelasDatabase.php');
     $dbHandler = new databaseLibrary();
     //$dbHandler->initializeConnection($koneksi);
+
+    //untuk ignore error di browser
+    error_reporting(E_ERROR | E_PARSE);
+
     
     $eventType= $_GET['eType'];
     

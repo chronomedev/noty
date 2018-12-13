@@ -65,8 +65,17 @@ function emptyChecker(){
 
 
 
-function emptyCheckerGeneral(){
+function addCategory(){
+    var input = document.getElementsByTagName("input")[1].value;
     var form = document.getElementById("add_category_form");
-    form.submit();
+    
+    console.log(input);
 
+    
+    if(input=="" || input== null){
+        window.alert("Nama kategori harus diisi!");
+    } else {
+        form.submit();
+    }
+    
 }

@@ -37,7 +37,7 @@
 									<input type="text" class="form-control" name="category_add" placeholder="Category">
 								</div>
 								<div class="form-group col-md-2 col-md-offset-10">
-                        <button type="button" onclick="emptyCheckerGeneral();" class="btn btn-lg btn-primary" style="margin: 10px;">Add</button>
+                        <button type="button" onclick="addCategory();" class="btn btn-lg btn-primary" style="margin: 10px;">Add</button>
                     </div>
 							</form>
 						</div>
